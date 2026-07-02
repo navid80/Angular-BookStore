@@ -1,3 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+@font-face {
+    font-family: 'Parastoo';
+    src: url('/fonts/Parastoo-VariableFont_wght.ttf') format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: url('/fonts/Vazirmatn-VariableFont_wght.ttf') format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lalezar';
+    src: url('/fonts/Lalezar-Regular.ttf') format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+    /* Colors */
+    --color-brand: #0034a6;
+
+    /* Fonts */
+    --font-brand: 'Lalezar', 'Parastoo', 'Vazir', sans-serif ;
+    --font-main: 'Parastoo', 'Vazir', sans-serif;
+    --font-secondery: 'Vazir', sans-serif ;
+}
