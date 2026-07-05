@@ -29,6 +29,7 @@
 @theme {
     /* Colors */
     --color-brand: #0034a6;
+    --color-light: #f7fbfe;
 
     /* Fonts */
     --font-brand: 'Lalezar', 'Parastoo', 'Vazir', sans-serif ;

@@ -1,0 +1,90 @@
+<div class="flex flex-col relative font-secondery">
+  <div
+    #origin
+    class="flex relative items-center focus-within:outline-brand focus-within:outline-2 pl-3 pr-1 py-1 rounded-lg"
+  >
+    <button
+      type="button"
+      class="hover:bg-gray-200/75 hover:cursor-pointer px-3 py-2 rounded-md group"
+      aria-label="Clear"
+      (mousedown)="$event.preventDefault()"
+      (click)="clear()"
+    >
+      <i
+        class="fa-solid fa-xmark text-brand/75 group-hover:text-brand"
+        translate="no"
+        aria-hidden="true"
+      ></i>
+    </button>
+    <input
+      #combobox="ngCombobox"
+      ngCombobox
+      class="px-4 py-2 mx-2 outline-none"
+      placeholder="جستجوی کتاب"
+      [(value)]="query"
+      [(expanded)]="popupExpanded"
+      (click)="popupExpanded.set(true)"
+    />
+    <i class="fa-solid fa-magnifying-glass text-brand" translate="no" aria-hidden="true"></i>
+  </div>
+  <div aria-live="polite" class="sr-only">
+    {{ countries().length === 0 ? 'نتیجه ای برای "' + query() + '" یافت نشد' : '' }}
+  </div>
+  <ng-template
+    [cdkConnectedOverlay]="{ origin, usePopover: 'inline', matchWidth: true }"
+    [cdkConnectedOverlayOpen]="popupExpanded()"
+  >
+    <ng-template ngComboboxPopup [combobox]="combobox">
+      <div class="w-full mt-2 p-2 max-h-44 rounded-lg bg-blue-100/30 text-sm shadow-lg">
+        @if (countries().length === 0) {
+          <div class="p-2">نتیجه‌ای یافت نشد</div>
+        }
+        <div
+          #listbox="ngListbox"
+          ngListbox
+          ngComboboxWidget
+          class="flex flex-col gap-2 h-full overflow-y-auto outline-none pl-2
+                 [&::-webkit-scrollbar]:w-2
+                 [&::-webkit-scrollbar-track]:bg-transparent
+                 [&::-webkit-scrollbar-thumb]:rounded-full
+                 [&::-webkit-scrollbar-thumb]:bg-gray-400
+                 hover:[&::-webkit-scrollbar-thumb]:bg-gray-500"
+          focusMode="activedescendant"
+          selectionMode="explicit"
+          [tabindex]="-1"
+          [activeDescendant]="listbox.activeDescendant()"
+          [(value)]="selectedOption"
+          (click)="onCommit()"
+          (keydown.enter)="onCommit()"
+        >
+          @for (country of countries(); track country) {
+            <div
+              class="hover:bg-brand/10
+                     hover:text-brand
+                     flex 
+                     items-center
+                     justify-between 
+                     px-4 min-h-9 
+                     rounded-lg 
+                     cursor-pointer 
+                     aria-selected:bg-brand/10 
+                     aria-selected:text-brand 
+                     data-[active=true]:outline-2
+                     data-[active=true]:outline-brand
+                     data-[active=true]:outline-offset-[-2px]
+                     group"
+              ngOption
+              [value]="country"
+              [label]="country"
+            >
+              <span class="option-label">{{ country }}</span>
+              <span class="hidden group-aria-[selected=true]:block" translate="no" aria-hidden="true">
+                <i class="fa-solid fa-circle-check text-brand"></i>
+              </span>
+            </div>
+          }
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>
