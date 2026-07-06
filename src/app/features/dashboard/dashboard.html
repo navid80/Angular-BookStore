@@ -1,7 +1,8 @@
 <div class="h-screen grid grid-cols-12 grid-rows-[85px_1fr]">
     <app-sidebar  class="col-span-2 row-span-2" />
     <app-navbar class="col-span-10" />
-    <main class="col-span-10">
-        <router-outlet></router-outlet>
+    <main class="col-span-10 overflow-y-auto">
+        <!-- <router-outlet></router-outlet> -->
+         <app-book-grid></app-book-grid>
     </main>
 </div>

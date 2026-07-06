@@ -1,0 +1,37 @@
+<div class="w-11/12 rounded-xl border border-gray-200 bg-white m-auto mt-4 pt-4 pb-3 overflow-x-auto">
+    <div class="w-full overflow-x-auto">
+        <table ngGrid class="w-full">
+            <thead class="border-gray-200 border-y-2">
+                <tr ngGridRow class="font-main font-semibold text-right text-lg">
+                    <th ngGridCell class="py-4 px-4 text-gray-700">ردیف</th>
+                    <th ngGridCell class="py-4 px-1 text-gray-700">عنوان</th>
+                    <th ngGridCell class="py-4 px-1 text-gray-700">دسته بندی</th>
+                    <th ngGridCell class="py-4 px-1 text-gray-700">نویسنده</th>
+                    <th ngGridCell class="py-4 px-1 text-gray-700">تاریخ انتشار</th>
+                    <th ngGridCell class="py-4 px-1 text-gray-700">عملیات</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-300">
+                @for(book of books(); track book.id) {
+                    <tr ngGridRow class="font-secondery">
+                        <td ngGridCell class="py-4 px-4">{{ book.id }}</td>
+                        <td ngGridCell class="py-4 px-1">{{ book.title }}</td>
+                        <td ngGridCell class="py-4 px-1">{{ book.category }}</td>
+                        <td ngGridCell class="py-4 px-1">{{ book.author }}</td>
+                        <td ngGridCell class="py-4 px-1">{{ book.publishDate }}</td>
+                        <td ngGridCell class="py-4 px-1">
+                            <span class="flex gap-4 text-lg">
+                                <button class="cursor-pointer p-1">
+                                    <i class="fa-regular fa-pen"></i>
+                                </button>
+                                <button class="cursor-pointer p-1">
+                                    <i class="fa-regular fa-trash"></i>
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
