@@ -1,0 +1,60 @@
+<button ngMenuTrigger #origin #trigger="ngMenuTrigger" [menu]="formatMenu()" 
+    class="font-secondery p-2 flex items-center gap-2 text-xl font-extrabold text-gray-700">
+    <img src="user.png" class="rounded-full size-11 ml-3" alt="Profile">
+    نوید داوودی
+    <i
+        class="fa-regular fa-angle-down text-lg transition-transform duration-300 ease-in-out"
+        [class.rotate-180]="trigger.expanded()">
+    </i>
+</button>
+<ng-template
+    [cdkConnectedOverlayOpen]="trigger.expanded()"
+    [cdkConnectedOverlay]="{origin, usePopover: 'inline'}"
+    [cdkConnectedOverlayPositions]="[
+        {originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 14}
+    ]"
+    cdkAttachPopoverAsChild
+>
+    <div ngMenu #formatMenu="ngMenu" class="bg-white p-2 w-60 rounded-lg border border-gray-200 shadow-theme-lg">
+        <div class="font-secondery p-2 space-y-2">
+            <p class="text-xl">نوید داوودی</p>
+            <p class="text-xs">NavidDavoudi@gmail.com</p>
+        </div>
+        <div class="border border-gray-100 my-2"></div>
+        <ng-template ngMenuContent>
+            <div ngMenuItem value="Edit Profile" 
+                class="flex items-center mb-1 gap-2 py-2 px-4 hover:bg-gray-100 hover:cursor-pointer
+                rounded-md">
+                <span translate="no" aria-hidden="true">
+                    <i class="fa-regular fa-circle-user text-xl"></i>
+                </span>
+                <span class="font-secondery">ویرایش پروفایل</span>
+            </div>
+            <div ngMenuItem value="Edit Profile" 
+                class="flex items-center mb-1 gap-2 py-2 px-4 hover:bg-gray-100 hover:cursor-pointer
+                rounded-md">
+                <span translate="no" aria-hidden="true">
+                    <i class="fa-regular fa-gear text-xl"></i>
+                </span>
+                <span class="font-secondery">تنظیمات حساب کاربری</span>
+            </div>
+            <div ngMenuItem value="Edit Profile" 
+                class="flex items-center gap-2 py-2 px-4 hover:bg-gray-100 hover:cursor-pointer
+                rounded-md">
+                <span translate="no" aria-hidden="true">
+                    <i class="fa-regular fa-circle-info text-xl"></i>
+                </span>
+                <span class="font-secondery">پشتیبانی</span>
+            </div>
+            <div class="border border-gray-100 my-2"></div>
+            <div ngMenuItem value="Edit Profile" 
+                class="flex items-center gap-2 py-2 px-4 hover:bg-gray-100 hover:cursor-pointer
+                rounded-md">
+                <span translate="no" aria-hidden="true">
+                    <i class="fa-regular fa-arrow-right-from-bracket text-xl"></i>
+                </span>
+                <span class="font-secondery">خروج</span>
+            </div>
+        </ng-template>
+    </div>
+</ng-template>
