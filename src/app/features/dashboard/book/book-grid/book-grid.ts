@@ -1,14 +1,33 @@
 import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
-import { Component, signal } from '@angular/core';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { Component, ElementRef, HostListener, signal, viewChild} from '@angular/core';
 
 @Component({
   selector: 'app-book-grid',
-  imports: [Grid, GridCell, GridRow, GridCellWidget],
+  imports: [Grid, GridCell, GridRow, GridCellWidget, OverlayModule],
   templateUrl: './book-grid.html',
   styleUrl: './book-grid.css',
 })
 export class BookGrid {
   books = signal(books);
+  isFilterOpen = signal<boolean>(false);
+  filterContainer = viewChild<ElementRef>('filterContainer');
+  filterBtn = viewChild<ElementRef>('filterBtn');
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (!this.isFilterOpen()) return;
+
+    const target = event.target as Node;
+
+    const clickedButton = this.filterBtn()?.nativeElement.contains(target);
+
+    const clickedInside = this.filterContainer()?.nativeElement.contains(target);
+
+    if (!clickedInside && !clickedButton) {
+      this.isFilterOpen.set(false);
+    }
+  }
 }
 const books = [
   {

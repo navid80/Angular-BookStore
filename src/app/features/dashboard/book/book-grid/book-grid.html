@@ -1,19 +1,73 @@
 <div class="w-11/12 rounded-xl border border-gray-200 bg-white m-auto mt-4 pt-4 pb-3 overflow-x-auto">
+    <div class="w-full flex justify-between items-center gap-4">
+        <div class="font-secondery space-y-1 p-4 pr-8">
+            <h3 class="text-xl font-semibold">کتاب‌ها</h3>
+            <h5>لیست کتاب های تعریف شده</h5>
+        </div>
+        <div class="flex gap-4 px-8 font-secondery">
+            <div class="w-75 flex shadow-sm items-center border border-gray-300 rounded-lg focus-within:ring-3 focus-within:ring-blue-500/10 focus-within:border-blue-300">
+                <input type="text" placeholder="جستجو..."
+                    class="h-11 w-full focus:outline-none py-2.5 pr-4 pl-11 text-sm text-gray-800 placeholder:text-gray-400 bg-transparent">
+                <i class="fa-regular fa-magnifying-glass text-gray-500 py-2 pl-4"></i>
+            </div>
+            <div>
+                <button
+                    (click)="isFilterOpen.update(status => !status)"
+                    #filterBtn
+                    cdkOverlayOrigin
+                    #filter="cdkOverlayOrigin"
+                    class="p-2.5 flex items-center justify-center hover:bg-gray-200 rounded-md cursor-pointer ring ring-gray-300 shadow-sm">
+                    <i class="fa-regular fa-filter text-2xl text-gray-500"></i>
+                </button>
+                <ng-template
+                    cdkConnectedOverlay
+                    [cdkConnectedOverlayOrigin]="filter"
+                    [cdkConnectedOverlayOpen]="isFilterOpen()"
+                    cdkConnectedOverlayUsePopover="inline"
+                    [cdkConnectedOverlayPositions]="[
+                        {originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetY: 10}
+                    ]"
+                >
+                    <div #filterContainer class="bg-white shadow-sm flex flex-col gap-4 px-4 py-6 rounded-md ring ring-gray-300 font-secondery">
+                        <label class="flex flex-col gap-1">
+                            دسته بندی
+                            <input type="text" placeholder="جستجوی دسته بندی" 
+                                class="outline-none border border-gray-300 rounded-lg text-sm text-gray-800 placeholder:text-gray-400 bg-transparent
+                                    py-2.5 pr-4 pl-11 focus:ring-3 focus:ring-blue-500/10 focus:border-blue-300">
+                        </label>
+                        <label class="flex flex-col gap-1">
+                            نویسنده
+                            <input type="text" placeholder="جستجوی نویسنده" 
+                                class="outline-none border border-gray-300 rounded-lg text-sm text-gray-800 placeholder:text-gray-400 bg-transparent
+                                    py-2.5 pr-4 pl-11 focus:ring-3 focus:ring-blue-500/10 focus:border-blue-300">
+                        </label>
+                        <label class="flex flex-col gap-1">
+                            تاریخ
+                            <input type="text" placeholder="جستجوی تاریخ" 
+                                class="outline-none border border-gray-300 rounded-lg text-sm text-gray-800 placeholder:text-gray-400 bg-transparent
+                                    py-2.5 pr-4 pl-11 focus:ring-3 focus:ring-blue-500/10 focus:border-blue-300">
+                        </label>
+                        <button class="rounded-md cursor-pointer ring ring-gray-300 shadow-sm w-25 h-8 m-auto hover:bg-brand hover:text-white hover:ring-0">اعمال</button>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
     <div class="w-full overflow-x-auto">
         <table ngGrid class="w-full">
             <thead class="border-gray-200 border-y-2">
                 <tr ngGridRow class="font-main font-semibold text-right text-lg">
-                    <th ngGridCell class="py-4 px-4 text-gray-700">ردیف</th>
-                    <th ngGridCell class="py-4 px-1 text-gray-700">عنوان</th>
-                    <th ngGridCell class="py-4 px-1 text-gray-700">دسته بندی</th>
-                    <th ngGridCell class="py-4 px-1 text-gray-700">نویسنده</th>
-                    <th ngGridCell class="py-4 px-1 text-gray-700">تاریخ انتشار</th>
-                    <th ngGridCell class="py-4 px-1 text-gray-700">عملیات</th>
+                    <th ngGridCell class="py-4 px-4 text-gray-500">ردیف</th>
+                    <th ngGridCell class="py-4 px-1 text-gray-500">عنوان</th>
+                    <th ngGridCell class="py-4 px-1 text-gray-500">دسته بندی</th>
+                    <th ngGridCell class="py-4 px-1 text-gray-500">نویسنده</th>
+                    <th ngGridCell class="py-4 px-1 text-gray-500">تاریخ انتشار</th>
+                    <th ngGridCell class="py-4 px-1 text-gray-500">عملیات</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-300">
                 @for(book of books(); track book.id) {
-                    <tr ngGridRow class="font-secondery">
+                    <tr ngGridRow class="font-secondery text-gray-700">
                         <td ngGridCell class="py-4 px-4">{{ book.id }}</td>
                         <td ngGridCell class="py-4 px-1">{{ book.title }}</td>
                         <td ngGridCell class="py-4 px-1">{{ book.category }}</td>
