@@ -1,10 +1,16 @@
-<div class="w-11/12 rounded-xl border border-gray-200 bg-white m-auto mt-4 pt-4 pb-3 overflow-x-auto">
+<div class="w-11/12 rounded-xl border border-gray-200 bg-white m-auto mt-4 pt-4 pb-3 overflow-x-auto my-5">
     <div class="w-full flex justify-between items-center gap-4">
         <div class="font-secondery space-y-1 p-4 pr-8">
             <h3 class="text-xl font-semibold">کتاب‌ها</h3>
             <h5>لیست کتاب های تعریف شده</h5>
         </div>
         <div class="flex gap-4 px-8 font-secondery">
+            <button class="p-2.5 bg-brand text-white font-semibold rounded-md hover:cursor-pointer hover:bg-gray-200 hover:text-gray-500 hover:ring hover:ring-gray-300 shadow-sm">
+                <span>ایجاد</span>
+            </button>
+            <button class="p-2.5 bg-brand text-white font-semibold rounded-md hover:cursor-pointer hover:bg-gray-200 hover:text-gray-500 hover:ring hover:ring-gray-300 shadow-sm">
+                <span>خروجی اکسل</span>
+            </button>
             <div class="w-75 flex shadow-sm items-center border border-gray-300 rounded-lg focus-within:ring-3 focus-within:ring-blue-500/10 focus-within:border-blue-300">
                 <input type="text" placeholder="جستجو..."
                     class="h-11 w-full focus:outline-none py-2.5 pr-4 pl-11 text-sm text-gray-800 placeholder:text-gray-400 bg-transparent">
@@ -87,5 +93,23 @@
                 }
             </tbody>
         </table>
+    </div>
+    <div class="w-full flex items-center justify-between border-t border-gray-200 pt-6 p-4">
+        <div class="flex gap-4 items-center">
+            <button class="p-2 size-10 border border-gray-200 rounded-md text-gray-400 hover:bg-gray-50 hover:cursor-pointer shadow-sm">
+                <i class="fa-regular fa-arrow-right"></i>
+            </button>
+            <div class="flex gap-2">
+                <span class="p-2 text-center size-10 hover:cursor-pointer rounded-md bg-brand text-white">1</span>
+                <span class="p-2 text-center size-10 hover:cursor-pointer rounded-md hover:bg-brand hover:text-white">2</span>
+                <span class="p-2 text-center size-10 hover:cursor-pointer rounded-md hover:bg-brand hover:text-white">3</span>
+            </div>
+            <button class="p-2 size-10 border border-gray-200 rounded-md text-gray-400 hover:bg-gray-50 hover:cursor-pointer shadow-sm">
+                <i class="fa-regular fa-arrow-left"></i>
+            </button>
+        </div>
+        <div class="font-secondery ml-10 p-2">
+            آیتم <span>1</span> تا <span>10</span> از <span>25</span> آیتم
+        </div>
     </div>
 </div>
