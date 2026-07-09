@@ -1,6 +1,8 @@
 import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { Component, ElementRef, HostListener, signal, viewChild} from '@angular/core';
+import { Component, ElementRef, HostListener, inject, OnInit, signal, viewChild} from '@angular/core';
+import { BookService } from '../services/book-service';
+import { BookModel } from '../models/book-model';
 
 @Component({
   selector: 'app-book-grid',
@@ -8,11 +10,36 @@ import { Component, ElementRef, HostListener, signal, viewChild} from '@angular/
   templateUrl: './book-grid.html',
   styleUrl: './book-grid.css',
 })
-export class BookGrid {
-  books = signal(books);
+export class BookGrid implements OnInit {
+  private readonly bookService = inject(BookService);
+
+  books = signal<BookModel[]>([]);
+  isLoading = signal<boolean>(false);
+  errorMesage = signal<string | null>(null);
+
   isFilterOpen = signal<boolean>(false);
   filterContainer = viewChild<ElementRef>('filterContainer');
   filterBtn = viewChild<ElementRef>('filterBtn');
+
+  ngOnInit(): void {
+    this.loadBooks();
+  }
+
+  loadBooks(): void {
+    this.isLoading.set(true);
+    this.errorMesage.set(null);
+
+    this.bookService.getAllBooks().subscribe({
+      next: (books) => {
+        this.books.set(books)
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.errorMesage.set('خطا در دریافت لیست کتاب‌ها');
+        this.isLoading.set(false);
+      }
+    })
+  }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -29,75 +56,3 @@ export class BookGrid {
     }
   }
 }
-const books = [
-  {
-    id: 1,
-    title: 'شازده کوچولو',
-    category: 'رمان',
-    author: 'آنتوان دو سنت اگزوپری',
-    publishDate: '1943-04-06'
-  },
-  {
-    id: 2,
-    title: 'سمفونی مردگان',
-    category: 'ادبیات',
-    author: 'عباس معروفی',
-    publishDate: '1989-01-01'
-  },
-  {
-    id: 3,
-    title: 'کیمیاگر',
-    category: 'رمان',
-    author: 'پائولو کوئیلو',
-    publishDate: '1988-01-01'
-  },
-  {
-    id: 4,
-    title: 'اثر مرکب',
-    category: 'موفقیت',
-    author: 'دارن هاردی',
-    publishDate: '2010-01-01'
-  },
-  {
-    id: 5,
-    title: 'هنر شفاف اندیشیدن',
-    category: 'روانشناسی',
-    author: 'رولف دوبلی',
-    publishDate: '2011-01-01'
-  },
-  {
-    id: 6,
-    title: 'صد سال تنهایی',
-    category: 'رمان',
-    author: 'گابریل گارسیا مارکز',
-    publishDate: '1967-05-30'
-  },
-  {
-    id: 7,
-    title: 'ملت عشق',
-    category: 'عاشقانه',
-    author: 'الیف شافاک',
-    publishDate: '2009-03-01'
-  },
-  {
-    id: 8,
-    title: 'جزء از کل',
-    category: 'رمان',
-    author: 'استیو تولتز',
-    publishDate: '2008-01-01'
-  },
-  {
-    id: 9,
-    title: 'بی‌شعوری',
-    category: 'روانشناسی',
-    author: 'خاویر کرمنت',
-    publishDate: '1990-01-01'
-  },
-  {
-    id: 10,
-    title: 'قدرت عادت',
-    category: 'توسعه فردی',
-    author: 'چارلز دوهیگ',
-    publishDate: '2012-02-28'
-  }
-];

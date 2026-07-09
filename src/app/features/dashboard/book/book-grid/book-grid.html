@@ -76,9 +76,9 @@
                     <tr ngGridRow class="font-secondery text-gray-700">
                         <td ngGridCell class="py-4 px-4">{{ book.id }}</td>
                         <td ngGridCell class="py-4 px-1">{{ book.title }}</td>
-                        <td ngGridCell class="py-4 px-1">{{ book.category }}</td>
-                        <td ngGridCell class="py-4 px-1">{{ book.author }}</td>
-                        <td ngGridCell class="py-4 px-1">{{ book.publishDate }}</td>
+                        <td ngGridCell class="py-4 px-1">{{ book.categoryName }}</td>
+                        <td ngGridCell class="py-4 px-1">{{ book.authorNames }}</td>
+                        <td ngGridCell class="py-4 px-1">{{ book.publishedYear }}</td>
                         <td ngGridCell class="py-4 px-1">
                             <span class="flex gap-4 text-lg">
                                 <button class="cursor-pointer p-1">
@@ -89,6 +89,11 @@
                                 </button>
                             </span>
                         </td>
+                    </tr>
+                }
+                @empty {
+                    <tr ngGridRow class="font-secondery text-gray-700">
+                        <td ngGridCell class="py-4 px-4">داده ای یافت نشد</td>
                     </tr>
                 }
             </tbody>
